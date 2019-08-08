@@ -32,22 +32,24 @@ class Plyr extends Component {
     tracks: [],
     sources: [],
 
-    onReady: () => {},
-    onPlay: () => {},
-    onPause: () => {},
-    onEnd: () => {},
-    onLoadedData: () => {},
-    onSeeked: () => {},
-    onRateChange: () => {},
-    onTimeUpdate: () => {},
-    onEnterFullscreen: () => {},
-    onExitFullscreen: () => {},
-    onVolumeChange: () => {},
-    onLanguageChange: () => {},
-    onControlsHidden: () => {},
-    onControlsShown: () => {},
-    onCaptionsEnabled: () => {},
-    onCaptionsDisabled: () => {},
+    onReady: () => { },
+    onPlay: () => { },
+    onPrevious: () => { },
+    onNext: () => { },
+    onPause: () => { },
+    onEnd: () => { },
+    onLoadedData: () => { },
+    onSeeked: () => { },
+    onRateChange: () => { },
+    onTimeUpdate: () => { },
+    onEnterFullscreen: () => { },
+    onExitFullscreen: () => { },
+    onVolumeChange: () => { },
+    onLanguageChange: () => { },
+    onControlsHidden: () => { },
+    onControlsShown: () => { },
+    onCaptionsEnabled: () => { },
+    onCaptionsDisabled: () => { },
 
     ...defaultProps,
   };
@@ -146,6 +148,8 @@ class Plyr extends Component {
           'pip',
           'airplay',
           'fullscreen',
+          'previous',
+          'next'
         ])
       ),
       PropTypes.func,
@@ -229,6 +233,14 @@ class Plyr extends Component {
 
       this.player.on('play', () => {
         this.props.onPlay && this.props.onPlay();
+      });
+
+      this.player.on('previous', () => {
+        this.props.onPrevious && this.props.onPrevious();
+      });
+
+      this.player.on('next', () => {
+        this.props.onNext && this.props.onNext();
       });
 
       this.player.on('pause', () => {
