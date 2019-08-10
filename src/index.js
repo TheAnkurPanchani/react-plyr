@@ -149,7 +149,8 @@ class Plyr extends Component {
           'airplay',
           'fullscreen',
           'previous',
-          'next'
+          'next',
+          'skip'
         ])
       ),
       PropTypes.func,
