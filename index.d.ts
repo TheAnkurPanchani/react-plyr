@@ -21,6 +21,7 @@ interface Props {
     onPlay?: () => void;
     onPrevious?: () => void;
     onNext?: () => void;
+    onClose?: () => void;
     onPause?: () => void;
     onEnd?: () => void;
     onLoadedData?: () => void;

@@ -36,6 +36,7 @@ class Plyr extends Component {
     onPlay: () => { },
     onPrevious: () => { },
     onNext: () => { },
+    onClose: () => { },
     onPause: () => { },
     onEnd: () => { },
     onLoadedData: () => { },
@@ -61,6 +62,9 @@ class Plyr extends Component {
 
     onReady: PropTypes.func,
     onPlay: PropTypes.func,
+    onPrevious: PropTypes.func,
+    onNext: PropTypes.func,
+    onClose: PropTypes.func,
     onPause: PropTypes.func,
     onEnd: PropTypes.func,
     onLoadedData: PropTypes.func,
@@ -137,6 +141,7 @@ class Plyr extends Component {
       PropTypes.string,
       PropTypes.arrayOf(
         PropTypes.oneOf([
+          'close',
           'play-large',
           'play',
           'progress',
@@ -242,6 +247,10 @@ class Plyr extends Component {
 
       this.player.on('next', () => {
         this.props.onNext && this.props.onNext();
+      });
+
+      this.player.on('close', () => {
+        this.props.onClose && this.props.onClose();
       });
 
       this.player.on('pause', () => {
