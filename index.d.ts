@@ -24,7 +24,9 @@ interface Props {
     onClose?: () => void;
     onPause?: () => void;
     onEnd?: () => void;
+    onLoadedMetadata?: () => void;
     onLoadedData?: () => void;
+    onSeeking?: () => void;
     onSeeked?: (time?: number) => void;
     onTimeUpdate?: (time?: number) => void;
     onEnterFullscreen?: () => void;
@@ -102,6 +104,8 @@ interface Props {
 }
 
 declare class Plyr extends Component<Props> {
+    elementRef: any;
+
     getType(): any;
 
     play(): void;

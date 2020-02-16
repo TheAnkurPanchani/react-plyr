@@ -39,7 +39,9 @@ class Plyr extends Component {
     onClose: () => { },
     onPause: () => { },
     onEnd: () => { },
+    onLoadedMetadata: () => { },
     onLoadedData: () => { },
+    onSeeking: () => { },
     onSeeked: () => { },
     onRateChange: () => { },
     onTimeUpdate: () => { },
@@ -67,7 +69,9 @@ class Plyr extends Component {
     onClose: PropTypes.func,
     onPause: PropTypes.func,
     onEnd: PropTypes.func,
+    onLoadedMetadata: PropTypes.func,
     onLoadedData: PropTypes.func,
+    onSeeking: PropTypes.func,
     onSeeked: PropTypes.func,
     onRateChange: PropTypes.func,
     onTimeUpdate: PropTypes.func,
@@ -261,8 +265,16 @@ class Plyr extends Component {
         this.props.onEnd && this.props.onEnd();
       });
 
+      this.player.on('loadedmetadata', () => {
+        this.props.onLoadedMetadata && this.props.onLoadedMetadata();
+      });
+
       this.player.on('loadeddata', () => {
         this.props.onLoadedData && this.props.onLoadedData();
+      });
+
+      this.player.on('seeking', () => {
+        this.props.onSeeking && this.props.onSeeking();
       });
 
       this.player.on('seeked', () => {
