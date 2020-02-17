@@ -228,6 +228,10 @@ class Plyr extends Component {
     };
 
     const node = this.elementRef.current;
+    if (this.props.provider === "html5" && !!this.props.playsinline && !!node) {
+      node.setAttribute('playsinline', '');
+      node.setAttribute('webkit-playsinline', '');
+    }
     this.player = node ? new plyr(node, options) : null;
 
     if (this.player) {

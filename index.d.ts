@@ -40,6 +40,7 @@ interface Props {
     debug?: boolean;
     autoplay?: boolean;
     autopause?: boolean;
+    playsinline?: boolean;
     seekTime?: number;
     volume?: number;
     muted?: boolean;
