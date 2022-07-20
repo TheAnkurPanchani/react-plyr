@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import plyr from 'plyr';
+import plyr from "@theankur/plyr";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 
-import difference from 'lodash.difference';
-import pick from 'lodash.pick';
+import difference from "lodash.difference";
+import pick from "lodash.pick";
 
-import defaultProps from './defaultProps';
+import defaultProps from "./defaultProps";
 
 class Plyr extends Component {
   player = null;
@@ -17,48 +17,48 @@ class Plyr extends Component {
   );
 
   state = {
-    muted: null,
+    muted: null
   };
 
   static getDerivedStateFromProps = nextProps => ({
-    muted: nextProps.muted,
+    muted: nextProps.muted
   });
 
   // Specifies the default values for props:
   static defaultProps = {
-    provider: 'youtube',
+    provider: "youtube",
     videoId: null,
     url: null,
     tracks: [],
     sources: [],
 
-    onReady: () => { },
-    onPlay: () => { },
-    onPrevious: () => { },
-    onNext: () => { },
-    onClose: () => { },
-    onPause: () => { },
-    onEnd: () => { },
-    onLoadedMetadata: () => { },
-    onLoadedData: () => { },
-    onSeeking: () => { },
-    onSeeked: () => { },
-    onRateChange: () => { },
-    onTimeUpdate: () => { },
-    onEnterFullscreen: () => { },
-    onExitFullscreen: () => { },
-    onVolumeChange: () => { },
-    onLanguageChange: () => { },
-    onControlsHidden: () => { },
-    onControlsShown: () => { },
-    onCaptionsEnabled: () => { },
-    onCaptionsDisabled: () => { },
+    onReady: () => {},
+    onPlay: () => {},
+    onPrevious: () => {},
+    onNext: () => {},
+    onClose: () => {},
+    onPause: () => {},
+    onEnd: () => {},
+    onLoadedMetadata: () => {},
+    onLoadedData: () => {},
+    onSeeking: () => {},
+    onSeeked: () => {},
+    onRateChange: () => {},
+    onTimeUpdate: () => {},
+    onEnterFullscreen: () => {},
+    onExitFullscreen: () => {},
+    onVolumeChange: () => {},
+    onLanguageChange: () => {},
+    onControlsHidden: () => {},
+    onControlsShown: () => {},
+    onCaptionsEnabled: () => {},
+    onCaptionsDisabled: () => {},
 
-    ...defaultProps,
+    ...defaultProps
   };
 
   static propTypes = {
-    provider: PropTypes.oneOf(['youtube', 'vimeo', 'html5', 'audio']),
+    provider: PropTypes.oneOf(["youtube", "vimeo", "html5", "audio"]),
     videoId: PropTypes.string,
     url: PropTypes.string,
 
@@ -110,71 +110,71 @@ class Plyr extends Component {
       default: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       options: PropTypes.arrayOf(
         PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-      ),
+      )
     }),
     loop: PropTypes.shape({
-      active: PropTypes.bool,
+      active: PropTypes.bool
     }),
     speed: PropTypes.shape({
       selected: PropTypes.number,
-      options: PropTypes.arrayOf(PropTypes.number),
+      options: PropTypes.arrayOf(PropTypes.number)
     }),
     keyboard: PropTypes.shape({
       focused: PropTypes.bool,
-      global: PropTypes.bool,
+      global: PropTypes.bool
     }),
     tooltips: PropTypes.shape({
       controls: PropTypes.bool,
-      seek: PropTypes.bool,
+      seek: PropTypes.bool
     }),
     captions: PropTypes.shape({
       active: PropTypes.bool,
       language: PropTypes.string,
-      update: PropTypes.bool,
+      update: PropTypes.bool
     }),
     fullscreen: PropTypes.shape({
       enabled: PropTypes.bool,
       fallback: PropTypes.bool,
-      iosNative: PropTypes.bool,
+      iosNative: PropTypes.bool
     }),
     storage: PropTypes.shape({
       enabled: PropTypes.bool,
-      key: PropTypes.string,
+      key: PropTypes.string
     }),
     controls: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.arrayOf(
         PropTypes.oneOf([
-          'close',
-          'play-large',
-          'play',
-          'progress',
-          'current-time',
-          'mute',
-          'volume',
-          'captions',
-          'settings',
-          'pip',
-          'airplay',
-          'fullscreen',
-          'previous',
-          'next',
-          'skip'
+          "close",
+          "play-large",
+          "play",
+          "progress",
+          "current-time",
+          "mute",
+          "volume",
+          "captions",
+          "settings",
+          "pip",
+          "airplay",
+          "fullscreen",
+          "previous",
+          "next",
+          "skip"
         ])
       ),
       PropTypes.func,
       PropTypes.object,
-      PropTypes.bool,
+      PropTypes.bool
     ]),
     settings: PropTypes.arrayOf(
-      PropTypes.oneOf(['captions', 'quality', 'speed'])
+      PropTypes.oneOf(["captions", "quality", "speed"])
     ),
     poster: PropTypes.string,
     sources: PropTypes.arrayOf(
       PropTypes.shape({
         src: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
-        size: PropTypes.number,
+        size: PropTypes.number
       })
     ),
     tracks: PropTypes.arrayOf(
@@ -184,9 +184,9 @@ class Plyr extends Component {
         src: PropTypes.string.isRequired,
         srclang: PropTypes.string,
         default: PropTypes.bool,
-        key: PropTypes.any,
+        key: PropTypes.any
       })
-    ),
+    )
   };
 
   getType = () => this.player && this.player.source && this.player.source.type;
@@ -217,25 +217,25 @@ class Plyr extends Component {
     const defaultOptions = Object.keys(defaultProps).reduce(
       (acc, current) => ({
         ...acc,
-        [current]: this.props[current],
+        [current]: this.props[current]
       }),
       {}
     );
 
     const options = {
       ...defaultOptions,
-      muted: this.state.muted,
+      muted: this.state.muted
     };
 
     const node = this.elementRef.current;
     if (this.props.provider === "html5" && !!this.props.playsinline && !!node) {
-      node.setAttribute('playsinline', '');
-      node.setAttribute('webkit-playsinline', '');
+      node.setAttribute("playsinline", "");
+      node.setAttribute("webkit-playsinline", "");
     }
     this.player = node ? new plyr(node, options) : null;
 
     if (this.player) {
-      this.player.on('ready', () => {
+      this.player.on("ready", () => {
         this.props.onReady && this.props.onReady(this.player);
 
         // TODO: workaround for autoplay in Youtube
@@ -245,89 +245,89 @@ class Plyr extends Component {
         }
       });
 
-      this.player.on('play', () => {
+      this.player.on("play", () => {
         this.props.onPlay && this.props.onPlay();
       });
 
-      this.player.on('previous', () => {
+      this.player.on("previous", () => {
         this.props.onPrevious && this.props.onPrevious();
       });
 
-      this.player.on('next', () => {
+      this.player.on("next", () => {
         this.props.onNext && this.props.onNext();
       });
 
-      this.player.on('close', () => {
+      this.player.on("close", () => {
         this.props.onClose && this.props.onClose();
       });
 
-      this.player.on('pause', () => {
+      this.player.on("pause", () => {
         this.props.onPause && this.props.onPause();
       });
 
-      this.player.on('ended', () => {
+      this.player.on("ended", () => {
         this.props.onEnd && this.props.onEnd();
       });
 
-      this.player.on('loadedmetadata', () => {
+      this.player.on("loadedmetadata", () => {
         this.props.onLoadedMetadata && this.props.onLoadedMetadata();
       });
 
-      this.player.on('loadeddata', () => {
+      this.player.on("loadeddata", () => {
         this.props.onLoadedData && this.props.onLoadedData();
       });
 
-      this.player.on('seeking', () => {
+      this.player.on("seeking", () => {
         this.props.onSeeking && this.props.onSeeking();
       });
 
-      this.player.on('seeked', () => {
+      this.player.on("seeked", () => {
         const time = this.getCurrentTime();
         this.props.onSeeked && this.props.onSeeked(time);
       });
 
-      this.player.on('ratechange', () => {
+      this.player.on("ratechange", () => {
         const { speed } = this.player;
         this.props.onRateChange && this.props.onRateChange(speed);
       });
 
-      this.player.on('timeupdate', () => {
+      this.player.on("timeupdate", () => {
         const time = this.getCurrentTime();
         this.props.onTimeUpdate && this.props.onTimeUpdate(time);
       });
 
-      this.player.on('enterfullscreen', () => {
+      this.player.on("enterfullscreen", () => {
         this.props.onEnterFullscreen && this.props.onEnterFullscreen();
       });
 
-      this.player.on('exitfullscreen', () => {
+      this.player.on("exitfullscreen", () => {
         this.props.onExitFullscreen && this.props.onExitFullscreen();
       });
 
-      this.player.on('volumechange', () => {
+      this.player.on("volumechange", () => {
         const { muted, volume } = this.player;
         this.props.onVolumeChange &&
           this.props.onVolumeChange({ muted, volume });
       });
 
-      this.player.on('languagechange', () => {
+      this.player.on("languagechange", () => {
         const { language } = this.player;
         this.props.onLanguageChange && this.props.onLanguageChange(language);
       });
 
-      this.player.on('controlshidden', () => {
+      this.player.on("controlshidden", () => {
         this.props.onControlsHidden && this.props.onControlsHidden();
       });
 
-      this.player.on('controlsshown', () => {
+      this.player.on("controlsshown", () => {
         this.props.onControlsShown && this.props.onControlsShown();
       });
 
-      this.player.on('captionsenabled', () => {
+      this.player.on("captionsenabled", () => {
         this.props.onCaptionsEnabled && this.props.onCaptionsEnabled();
       });
 
-      this.player.on('captionsdisabled', () => {
+      this.player.on("captionsdisabled", () => {
         this.props.onCaptionsDisabled && this.props.onCaptionsDisabled();
       });
     }
@@ -350,13 +350,13 @@ class Plyr extends Component {
 
   updateVideoSource = (videoId, provider) => {
     this.player.source = {
-      type: 'video',
+      type: "video",
       sources: [
         {
           src: videoId,
-          provider,
-        },
-      ],
+          provider
+        }
+      ]
     };
   };
 
@@ -379,7 +379,7 @@ class Plyr extends Component {
     const captionsMap = tracks.map((source, index) => {
       const {
         key = index,
-        kind = 'captions',
+        kind = "captions",
         label,
         src,
         srclang,
@@ -459,9 +459,9 @@ class Plyr extends Component {
   };
 
   render() {
-    if (this.props.provider === 'audio') {
+    if (this.props.provider === "audio") {
       return this.renderAudioPlayer();
-    } else if (this.props.provider === 'html5') {
+    } else if (this.props.provider === "html5") {
       return this.renderPlayerWithSRC();
     }
 

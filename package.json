@@ -56,9 +56,9 @@
     ]
   },
   "dependencies": {
+    "@theankur/plyr": "^3.7.2",
     "lodash.difference": "^4.5.0",
     "lodash.pick": "^4.4.0",
-    "plyr": "github:TheAnkurPanchani/plyr#master",
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
