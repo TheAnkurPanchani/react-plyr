@@ -7,148 +7,148 @@
 import { Component } from "react";
 
 interface OnVolumeChangeParam {
-    muted: boolean;
-    volume: number;
+  muted: boolean;
+  volume: number;
 }
 
 interface Props {
-    className?: string;
-    provider?: "youtube" | "vimeo" | "html5" | "audio";
-    videoId?: string;
-    url?: string;
+  className?: string;
+  provider?: "youtube" | "vimeo" | "html5" | "audio";
+  videoId?: string;
+  url?: string;
 
-    onReady?: (player?: any) => void;
-    onPlay?: () => void;
-    onPrevious?: () => void;
-    onNext?: () => void;
-    onClose?: () => void;
-    onPause?: () => void;
-    onEnd?: () => void;
-    onLoadedMetadata?: () => void;
-    onLoadedData?: () => void;
-    onSeeking?: () => void;
-    onSeeked?: (time?: number) => void;
-    onTimeUpdate?: (time?: number) => void;
-    onEnterFullscreen?: () => void;
-    onExitFullscreen?: () => void;
-    onVolumeChange?: (params: OnVolumeChangeParam) => void;
-    onCaptionsEnabled?: () => void;
-    onCaptionsDisabled?: () => void;
+  onReady?: (player?: any) => void;
+  onPlay?: () => void;
+  onPrevious?: () => void;
+  onNext?: () => void;
+  onClose?: () => void;
+  onPause?: () => void;
+  onEnd?: () => void;
+  onLoadedMetadata?: () => void;
+  onLoadedData?: () => void;
+  onSeeking?: () => void;
+  onSeeked?: (time?: number) => void;
+  onTimeUpdate?: (time?: number) => void;
+  onEnterFullscreen?: () => void;
+  onExitFullscreen?: () => void;
+  onVolumeChange?: (params: OnVolumeChangeParam) => void;
+  onCaptionsEnabled?: () => void;
+  onCaptionsDisabled?: () => void;
 
+  enabled?: boolean;
+  title?: string;
+  debug?: boolean;
+  autoplay?: boolean;
+  autopause?: boolean;
+  playsinline?: boolean;
+  seekTime?: number;
+  volume?: number;
+  muted?: boolean;
+  duration?: number;
+  displayDuration?: boolean;
+  invertTime?: boolean;
+  toggleInvert?: boolean;
+  ratio?: string;
+  clickToPlay?: boolean;
+  hideControls?: boolean;
+  resetOnEnd?: boolean;
+  disableContextMenu?: boolean;
+  loadSprite?: boolean;
+  iconPrefix?: string;
+  iconUrl?: string;
+  blankVideo?: string;
+  quality?: {
+    default?: string | number;
+    option?: string[] | number[];
+  };
+  loop?: {
+    active?: boolean;
+  };
+  speed?: {
+    selected?: number;
+    options?: number[];
+  };
+  keyboard?: {
+    focused?: boolean;
+    global?: boolean;
+  };
+  tooltips?: {
+    controls?: boolean;
+    seek?: boolean;
+  };
+  fullscreen?: {
     enabled?: boolean;
-    title?: string;
-    debug?: boolean;
-    autoplay?: boolean;
-    autopause?: boolean;
-    playsinline?: boolean;
-    seekTime?: number;
-    volume?: number;
-    muted?: boolean;
-    duration?: number;
-    displayDuration?: boolean;
-    invertTime?: boolean;
-    toggleInvert?: boolean;
-    ratio?: string;
-    clickToPlay?: boolean;
-    hideControls?: boolean;
-    resetOnEnd?: boolean;
-    disableContextMenu?: boolean;
-    loadSprite?: boolean;
-    iconPrefix?: string;
-    iconUrl?: string;
-    blankVideo?: string;
-    quality?: {
-        default?: string | number;
-        option?: string[] | number[];
-    };
-    loop?: {
-        active?: boolean
-    };
-    speed?: {
-        selected?: number;
-        options?: number[]
-    };
-    keyboard?: {
-        focused?: boolean;
-        global?: boolean
-    };
-    tooltips?: {
-        controls?: boolean;
-        seek?: boolean
-    };
-    fullscreen?: {
-        enabled?: boolean;
-        fallback?: boolean;
-        iosNative?: boolean
-    };
-    storage?: {
-        enabled?: boolean;
-        key?: string
-    };
-    controls?: string[];
-    settings?: string[];
+    fallback?: boolean;
+    iosNative?: boolean;
+  };
+  storage?: {
+    enabled?: boolean;
+    key?: string;
+  };
+  controls?: string[];
+  settings?: string[];
 
-    poster?: string;
-    sources?: Array<{
-        src: string;
-        type: string;
-        size?: string;
-    }>;
-    captions?: Array<{
-        kind?: string;
-        label?: string;
-        src: string;
-        srclang?: string;
-        default?: boolean;
-        key?: any;
-    }>;
+  poster?: string;
+  sources?: Array<{
+    src: string;
+    type: string;
+    size?: string;
+  }>;
+  captions?: Array<{
+    kind?: string;
+    label?: string;
+    src: string;
+    srclang?: string;
+    default?: boolean;
+    key?: any;
+  }>;
 }
 
 declare class Plyr extends Component<Props> {
-    elementRef: any;
+  elementRef: any;
 
-    getType(): any;
+  getType(): any;
 
-    play(): void;
+  play(): void;
 
-    pause(): void;
+  pause(): void;
 
-    togglePlay(): void;
+  togglePlay(): void;
 
-    stop(): void;
+  stop(): void;
 
-    restart(): void;
+  restart(): void;
 
-    rewind(time: number): void;
+  rewind(time: number): void;
 
-    forward(time: number): void;
+  forward(time: number): void;
 
-    getCurrentTime(): number;
+  getCurrentTime(): number;
 
-    setCurrentTime(time: number): void;
+  setCurrentTime(time: number): void;
 
-    getDuration(): number;
+  getDuration(): number;
 
-    getVolume(): number;
+  getVolume(): number;
 
-    isMuted(): boolean;
+  isMuted(): boolean;
 
-    isPaused(): boolean;
+  isPaused(): boolean;
 
-    toggleMute(): void;
+  toggleMute(): void;
 
-    setMuted(muted?: boolean): void;
+  setMuted(muted?: boolean): void;
 
-    increaseVolume(step: boolean): void;
+  increaseVolume(step: boolean): void;
 
-    decreaseVolume(step: boolean): void;
+  decreaseVolume(step: boolean): void;
 
-    setVolume(amount: boolean): void;
+  setVolume(amount: number): void;
 
-    enterFullscreen(): void;
+  enterFullscreen(): void;
 
-    exitFullscreen(): void;
+  exitFullscreen(): void;
 
-    toggleFullscreen(): void;
+  toggleFullscreen(): void;
 }
 export default Plyr;
